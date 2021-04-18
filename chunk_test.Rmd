@@ -2,7 +2,7 @@
 title: "Test-Driving `knitr::read_chunk()` to Include External Script Chunks in an RMarkdown Document"
 author: "Eric Buhle"
 date: "`r format(Sys.time(), '%Y-%m-%d')`"
-output: github_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
