@@ -7,7 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 library(knitr)
-knitr::opts_chunk$set(echo = TRUE, out.width = "60%", fig.align = "center")
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
 ```
 
 This example follows a helpful [blog post](http://zevross.com/blog/2014/07/09/making-use-of-external-r-code-in-knitr-and-r-markdown/) by Zev Ross that shows how to import code chunks from an external script into an RMarkdown document. (Also see [here](https://rpubs.com/thaufas/450838) for some more creative usage.)
