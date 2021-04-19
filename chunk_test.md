@@ -8,9 +8,9 @@ Eric Buhle
 -   [Child script 1](#child-script-1)
     -   [Create a data frame](#create-a-data-frame)
     -   [Make a plot](#make-a-plot)
-    -   [Fit a linear model](#fit-a-linear-model)
+    -   [How to fit a linear model](#how-to-fit-a-linear-model)
 -   [Child script 2](#child-script-2)
-    -   [Silly `ggplot2` demo](#silly-ggplot2-demo)
+    -   [Fun with `ggplot2`](#fun-with-ggplot2)
     -   [Chunk with inputs from
         RMarkdown](#chunk-with-inputs-from-rmarkdown)
 
@@ -131,13 +131,13 @@ dat <- data.frame(x = x, y = y)
 head(dat)
 ```
 
-              x           y
-    1 0.0000000 -1.28901834
-    2 0.1010101 -0.01521634
-    3 0.2020202  0.53043899
-    4 0.3030303 -0.13472366
-    5 0.4040404 -0.11135649
-    6 0.5050505  0.65664317
+              x          y
+    1 0.0000000 -0.3679264
+    2 0.1010101  0.7355091
+    3 0.2020202  1.6520385
+    4 0.3030303 -0.6536073
+    5 0.4040404  0.3091286
+    6 0.5050505 -1.1355101
 
 ## Make a plot
 
@@ -148,7 +148,7 @@ This time we’ll use `echo = FALSE` to suppress the code.
 
 <img src="chunk_test_files/figure-gfm/plot_xy-1.png" width="40%" style="display: block; margin: auto;" />
 
-## Fit a linear model
+## How to fit a linear model
 
 The next chunk shows how to fit a linear model to `y` as a function of
 `x`, but doesn’t actually do so (`eval = FALSE`). RMarkdown:
@@ -168,7 +168,7 @@ summary(lmxy)
 Now we’ll use a chunk from the second script, entirely unrelated to the
 first.
 
-## Silly `ggplot2` demo
+## Fun with `ggplot2`
 
 The RMarkdown syntax
 
@@ -243,8 +243,8 @@ newvar <- runif(10,0,1)
 print(newvar)
 ```
 
-     [1] 0.81400348 0.16837935 0.24003129 0.03536744 0.17771894 0.01232703
-     [7] 0.02751720 0.75393340 0.18709198 0.27246424
+     [1] 0.87617457 0.82253903 0.22407018 0.78569712 0.42350704 0.02986831
+     [7] 0.91914623 0.71563321 0.99980845 0.19719154
 
 ``` r
 plot(newvar)

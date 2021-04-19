@@ -87,7 +87,7 @@ This time we'll use `echo = FALSE` to suppress the code.
 ```{r plot_xy, fig.height=5, fig.width=5, out.width = "40%", echo = FALSE}
 ```
 
-## Fit a linear model
+## How to fit a linear model
 
 The next chunk shows how to fit a linear model to `y` as a function of `x`, but doesn't actually do so (`eval = FALSE`). RMarkdown:
 
@@ -105,7 +105,7 @@ Result:
 
 Now we'll use a chunk from the second script, entirely unrelated to the first.
 
-## Silly `ggplot2` demo
+## Fun with `ggplot2`
 
 The RMarkdown syntax
 
