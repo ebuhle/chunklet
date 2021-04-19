@@ -121,7 +121,7 @@ does this, for whatever reason:
 
 ## Chunk with inputs from RMarkdown
 
-Can we invoke an external chunk that relies on objects defined here in the RMarkdown itself? Let's find out. First we assign a variable `newvar`, and then we call a chunk that prints its contents and plots it with the default method.
+Can we invoke an external chunk that relies on objects defined here in the RMarkdown itself? Let's find out. First we assign a variable `newvar`
 
 ````
 `r ''````{r assign_newvar1}
@@ -133,6 +133,8 @@ newvar <- 1:10
 newvar <- 1:10
 ```
 
+
+and then we call a chunk that prints its contents and plots it with the default method.
 
 ````
 `r ''````{r needs_external_input1, fig.height=5, fig.width=5, out.width = "40%"}
