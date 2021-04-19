@@ -3,8 +3,11 @@ title: "Test-Driving `knitr::read_chunk()` to Include External Script Chunks in 
 author: "Eric Buhle"
 date: "2019-04-30 (updated `r format(Sys.time(), '%Y-%m-%d')`)"
 output: 
-  html_document: default
-  github_document: default
+  github_document: 
+    toc: TRUE
+  html_document: 
+    toc: TRUE
+    toc_float: TRUE
 ---
 
 ```{r setup, include=FALSE}
@@ -58,7 +61,7 @@ The chunk `needs_external_input`, counterintuitively, needs external input. Spec
 
 # Script 1
 
-## Run the `variables_xy` chunk and use the variables it creates
+## Create a data frame
 
 The RMarkdown chunk
 
@@ -72,7 +75,7 @@ produces this:
 ```{r variables_xy}
 ```
 
-## Run the `plot_xy` chunk and create the plot
+## Make a plot
 
 This time we'll use `echo = FALSE` to suppress the code.
 
@@ -84,7 +87,7 @@ This time we'll use `echo = FALSE` to suppress the code.
 ```{r plot_xy, fig.height=5, fig.width=5, out.width = "40%", echo = FALSE}
 ```
 
-## Fit linear model
+## Fit a linear model
 
 The next chunk shows how to fit a linear model to `y` as a function of `x`, but doesn't actually do so (`eval = FALSE`). RMarkdown:
 
@@ -116,7 +119,7 @@ does this, for whatever reason:
 ```{r ggplot2_demo, fig.width=7, fig.height=3, out.width="75%"}
 ```
 
-## Chunk that requires objects defined in RMarkdown
+## Chunk with inputs from RMarkdown
 
 Can we invoke an external chunk that relies on objects defined here in the RMarkdown itself? Let's find out. First we assign a variable `newvar`, and then we call a chunk that prints its contents and plots it with the default method.
 
@@ -126,6 +129,11 @@ newvar <- 1:10
 ```
 ````
 
+```{r assign_newvar1}
+newvar <- 1:10
+```
+
+
 ````
 `r ''````{r needs_external_input1, fig.height=5, fig.width=5, out.width = "40%"}
 <<needs_external_input>>
@@ -134,9 +142,6 @@ newvar <- 1:10
 
 That produces the echoed R code followed by the results of the `print()` and `plot()` calls, respectively:
 
-```{r assign_newvar1}
-newvar <- 1:10
-```
 ```{r needs_external_input1, fig.height=5, fig.width=5, out.width = "40%"}
 <<needs_external_input>>
 ```

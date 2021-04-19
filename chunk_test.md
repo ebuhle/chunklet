@@ -4,6 +4,16 @@ an RMarkdown Document
 Eric Buhle
 2019-04-30 (updated 2021-04-18)
 
+-   [Read chunks](#read-chunks)
+-   [Script 1](#script-1)
+    -   [Create a data frame](#create-a-data-frame)
+    -   [Make a plot](#make-a-plot)
+    -   [Fit a linear model](#fit-a-linear-model)
+-   [Script 2](#script-2)
+    -   [Silly `ggplot2` demo](#silly-ggplot2-demo)
+    -   [Chunk with inputs from
+        RMarkdown](#chunk-with-inputs-from-rmarkdown)
+
 This example follows a helpful [blog
 post](http://zevross.com/blog/2014/07/09/making-use-of-external-r-code-in-knitr-and-r-markdown/)
 by Zev Ross that shows how to import code chunks from an external script
@@ -104,7 +114,7 @@ chunk again, and whether the behavior differs for the `print()` and
 
 # Script 1
 
-## Run the `variables_xy` chunk and use the variables it creates
+## Create a data frame
 
 The RMarkdown chunk
 
@@ -120,15 +130,15 @@ dat <- data.frame(x = x, y = y)
 head(dat)
 ```
 
-              x           y
-    1 0.0000000 -0.39566120
-    2 0.1010101  0.11742139
-    3 0.2020202  0.45919810
-    4 0.3030303 -0.02611631
-    5 0.4040404  0.15492290
-    6 0.5050505 -0.22958509
+              x         y
+    1 0.0000000 1.0923361
+    2 0.1010101 0.1921724
+    3 0.2020202 0.1377121
+    4 0.3030303 1.9035662
+    5 0.4040404 1.0046779
+    6 0.5050505 0.8293738
 
-## Run the `plot_xy` chunk and create the plot
+## Make a plot
 
 This time we’ll use `echo = FALSE` to suppress the code.
 
@@ -137,7 +147,7 @@ This time we’ll use `echo = FALSE` to suppress the code.
 
 <img src="chunk_test_files/figure-gfm/plot_xy-1.png" width="40%" style="display: block; margin: auto;" />
 
-## Fit linear model
+## Fit a linear model
 
 The next chunk shows how to fit a linear model to `y` as a function of
 `x`, but doesn’t actually do so (`eval = FALSE`). RMarkdown:
@@ -176,7 +186,7 @@ ggplot(mpg, aes(displ, hwy)) +
 
 <img src="chunk_test_files/figure-gfm/ggplot2_demo-1.png" width="75%" style="display: block; margin: auto;" />
 
-## Chunk that requires objects defined in RMarkdown
+## Chunk with inputs from RMarkdown
 
 Can we invoke an external chunk that relies on objects defined here in
 the RMarkdown itself? Let’s find out. First we assign a variable
@@ -187,16 +197,16 @@ with the default method.
     newvar <- 1:10
     ```
 
+``` r
+newvar <- 1:10
+```
+
     ```{r needs_external_input1, fig.height=5, fig.width=5, out.width = "40%"}
     <<needs_external_input>>
     ```
 
 That produces the echoed R code followed by the results of the `print()`
 and `plot()` calls, respectively:
-
-``` r
-newvar <- 1:10
-```
 
 ``` r
 print(newvar)
@@ -221,8 +231,8 @@ newvar <- runif(10,0,1)
 print(newvar)
 ```
 
-     [1] 0.3823764 0.9108847 0.6328376 0.5720809 0.3803125 0.2438452 0.8560350
-     [8] 0.6641573 0.2413165 0.9071208
+     [1] 0.666258515 0.036717009 0.045206799 0.345214070 0.801928192 0.231067532
+     [7] 0.005078128 0.156382663 0.828422476 0.603508833
 
 ``` r
 plot(newvar)
