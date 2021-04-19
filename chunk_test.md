@@ -98,9 +98,6 @@ if the results update when we reassign `newvar` and invoke the external
 chunk again, and whether the behavior differs for the `print()` and
 `plot()` statements.
 
-Now let’s use the **knitr** chunks we’ve ingested from these two
-external scripts.
-
 # Script 1
 
 ## Run the `variables_xy` chunk and use the variables it creates
@@ -112,13 +109,13 @@ dat <- data.frame(x = x, y = y)
 head(dat)
 ```
 
-              x           y
-    1 0.0000000 -1.75123447
-    2 0.1010101 -0.06833459
-    3 0.2020202 -0.15204394
-    4 0.3030303 -0.86556698
-    5 0.4040404 -0.14170262
-    6 0.5050505 -0.22392059
+              x          y
+    1 0.0000000  0.1479187
+    2 0.1010101 -0.7328454
+    3 0.2020202 -0.5355338
+    4 0.3030303 -0.9461888
+    5 0.4040404  1.4595739
+    6 0.5050505 -1.1773967
 
 ## Run the `plot_xy` chunk and create the plot
 
@@ -186,8 +183,8 @@ newvar <- runif(10,0,1)
 print(newvar)
 ```
 
-     [1] 0.93234423 0.27269406 0.19986203 0.12383131 0.72788539 0.05632216
-     [7] 0.43570585 0.12014576 0.90407051 0.53589644
+     [1] 0.76998502 0.64402819 0.66886307 0.50661462 0.07519542 0.70125307
+     [7] 0.91853503 0.81782314 0.53554261 0.53655458
 
 ``` r
 plot(newvar)
