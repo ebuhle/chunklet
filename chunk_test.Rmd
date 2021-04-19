@@ -2,15 +2,19 @@
 title: "Test-Driving `knitr::read_chunk()` to Include External Script Chunks in an RMarkdown Document"
 author: "Eric Buhle"
 date: "`r format(Sys.time(), '%Y-%m-%d')`"
-output: html_document
+output: 
+  github_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+knitr::opts_chunk$set(tidy = FALSE, highlight = TRUE, comment = NA, 
+                      dev = "png", dev.args = list(type = "cairo-png"), dpi = 300,
+                      fig.align = "center")
 ```
 
-This example follows a helpful [blog post](http://zevross.com/blog/2014/07/09/making-use-of-external-r-code-in-knitr-and-r-markdown/) by Zev Ross that shows how to import code chunks from an external script into an RMarkdown document. (Also see [here](https://rpubs.com/thaufas/450838) for some more creative usage.)
+This example follows a helpful [blog post](http://zevross.com/blog/2014/07/09/making-use-of-external-r-code-in-knitr-and-r-markdown/) by Zev Ross that shows how to import code chunks from an external script into an RMarkdown document. Also see [here](https://rpubs.com/thaufas/450838) for some more creative usage.
 
 RMarkdown is great, but IMO it is unsuitable as an environment for code development, especially for complex analyses. The formatting and interwoven text are distracting and make re-running code a hassle; the chunk tool buttons take up screen real estate and the auto-line wrapping is the enemy of legibility; debugging is a real PITA; and I *hate* the inline presentation of figures and output when running interactively. R scripts are superior in all these respects. Until now, my strategy has been to copy-paste code chunks from a script into an RMarkdown document, a hacky approach with obvious drawbacks. Usually I end up tweaking and refining the code in the .Rmd (as opposed to doing it in the script and having to remember to copy-paste it again) and so the two documents get out of sync.
 
