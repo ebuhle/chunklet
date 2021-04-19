@@ -131,12 +131,12 @@ head(dat)
 ```
 
               x          y
-    1 0.0000000 -1.3294274
-    2 0.1010101  2.3049243
-    3 0.2020202  0.6362383
-    4 0.3030303  0.6266472
-    5 0.4040404  0.7330369
-    6 0.5050505 -1.1259917
+    1 0.0000000  1.2065218
+    2 0.1010101  0.3305251
+    3 0.2020202 -0.3380344
+    4 0.3030303  0.9562074
+    5 0.4040404 -0.4779032
+    6 0.5050505  0.4040949
 
 ## Make a plot
 
@@ -190,7 +190,8 @@ ggplot(mpg, aes(displ, hwy)) +
 
 Can we invoke an external chunk that relies on objects defined here in
 the RMarkdown itself? Let’s find out. First we assign a variable
-`newvar`
+`newvar` with a chunk label foreshadowing that we may want to do this
+again.
 
     ```{r assign_newvar1}
     newvar <- 1:10
@@ -200,7 +201,7 @@ the RMarkdown itself? Let’s find out. First we assign a variable
 newvar <- 1:10
 ```
 
-and then we call a chunk that prints its contents and plots it with the
+Then we call a chunk that prints its contents and plots it with the
 default method.
 
     ```{r needs_external_input1, fig.height=5, fig.width=5, out.width = "40%"}
@@ -233,8 +234,8 @@ newvar <- runif(10,0,1)
 print(newvar)
 ```
 
-     [1] 0.1446189 0.5353912 0.8758082 0.8284798 0.2432222 0.7778484 0.5158203
-     [8] 0.4262410 0.6996909 0.6191740
+     [1] 0.008015195 0.542895776 0.059609188 0.243687603 0.796427866 0.026146993
+     [7] 0.969244404 0.139243144 0.901149487 0.136289297
 
 ``` r
 plot(newvar)
