@@ -131,13 +131,13 @@ dat <- data.frame(x = x, y = y)
 head(dat)
 ```
 
-              x          y
-    1 0.0000000 -0.3679264
-    2 0.1010101  0.7355091
-    3 0.2020202  1.6520385
-    4 0.3030303 -0.6536073
-    5 0.4040404  0.3091286
-    6 0.5050505 -1.1355101
+              x           y
+    1 0.0000000 -0.71546751
+    2 0.1010101 -0.07035137
+    3 0.2020202  0.85843649
+    4 0.3030303  0.52407192
+    5 0.4040404 -0.61300524
+    6 0.5050505 -0.73190538
 
 ## Make a plot
 
@@ -202,8 +202,8 @@ again.
 newvar <- 1:10
 ```
 
-Then we call a chunk that prints its contents and plots it with the
-default method.
+Then we call an external chunk that prints `newvar` and plots it with
+the default method.
 
     ```{r needs_external_input1, fig.height=5, fig.width=5, out.width = "40%"}
     <<needs_external_input>>
@@ -243,8 +243,8 @@ newvar <- runif(10,0,1)
 print(newvar)
 ```
 
-     [1] 0.87617457 0.82253903 0.22407018 0.78569712 0.42350704 0.02986831
-     [7] 0.91914623 0.71563321 0.99980845 0.19719154
+     [1] 0.5452101 0.6844472 0.1503743 0.5782785 0.9788758 0.1626029 0.8840860
+     [8] 0.2390834 0.8687867 0.9995785
 
 ``` r
 plot(newvar)
