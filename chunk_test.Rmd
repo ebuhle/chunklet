@@ -3,11 +3,12 @@ title: "Test-Driving `knitr::read_chunk()` to Include External Script Chunks in 
 author: "Eric Buhle"
 date: "2019-04-30 (updated `r format(Sys.time(), '%Y-%m-%d')`)"
 output: 
-  html_document: default
   github_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
+library(here)
 library(knitr)
 knitr::opts_chunk$set(tidy = FALSE, highlight = TRUE, comment = NA, 
                       dev = "png", dev.args = list(type = "cairo-png"), dpi = 300,
@@ -28,9 +29,25 @@ The "externalization" strategy shown here offers the best of both worlds:
 First, right after the `setup` chunk, we call `knitr::read_chunk()` to ingest the code chunks from one or more scripts. (This part is crucial: we can read chunks from as many "child" scripts as we want, so long as the chunk names don't conflict!) Ordinarily we would use `echo = FALSE` to read in the script's chunks silently. Note that the code is not executed at this point; it is just made available to be invoked in subsequent chunks.
 
 ```{r read_chunks}
-read_chunk("chunk_test1.R")
-read_chunk("chunk_test2.R")
+read_chunk(here("chunk_test1.R"))
+read_chunk(here("chunk_test2.R"))
 ```
+
+Let's see what's in these external scripts. This is `chunk_test1.R`:
+
+```{r chunk_test1, echo=FALSE, warning=FALSE}
+writeLines(readLines(here("chunk_test1.R")))
+```
+
+Note the special **knitr** comment syntax `## @knitr chunk_name` that demarcates a new chunk. As the regular comments (preceded by `#`) helpfully explain, the empty `## @knitr` can be used to delimit the end of a chunk followed by some lines we don't want to use in the RMarkdown (for example, verbose comments that are redundant with the body text).
+
+Here is `chunk_test2.R`:
+
+```{r chunk_test2, echo=FALSE, warning=FALSE}
+writeLines(readLines(here("chunk_test2.R")))
+```
+
+Now let's use the **knitr** chunks we've ingested from these two external scripts.
 
 # Script 1
 

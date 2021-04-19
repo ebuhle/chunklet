@@ -41,9 +41,57 @@ executed at this point; it is just made available to be invoked in
 subsequent chunks.
 
 ``` r
-read_chunk("chunk_test1.R")
-read_chunk("chunk_test2.R")
+read_chunk(here("chunk_test1.R"))
+read_chunk(here("chunk_test2.R"))
 ```
+
+Let’s see what’s in these external scripts. This is `chunk_test1.R`:
+
+    ## @knitr variables_xy
+    x <- seq(0, 10, length = 100)
+    y <- x + rnorm(100)
+    dat <- data.frame(x = x, y = y)
+    head(dat)
+
+    ## @knitr plot_xy
+    plot(x,y)
+
+    ## @knitr
+    # Here is some code that is not part of a knitr chunk
+    # (apparently prefacing the unused chunk with an empty knitr chunk label works;
+    # we might also use a label like "unused" for all such chunks, which does not
+    # create a conflict unless the chunks are invoked, in which case the last one is used)
+    hist(x)
+
+    ## @knitr lm_xy
+    lmxy <- lm(y ~ x, data = dat)
+    summary(lmxy)
+
+    ## @knitr
+    # And some more code that is not part of a knitr chunk
+    Sys.time()
+
+Note the special **knitr** comment syntax `## @knitr chunk_name` that
+demarcates a new chunk. As the regular comments (preceded by `#`)
+helpfully explain, the empty `## @knitr` can be used to delimit the end
+of a chunk followed by some lines we don’t want to use in the RMarkdown
+(for example, verbose comments that are redundant with the body text).
+
+Here is `chunk_test2.R`:
+
+    ## @knitr ggplot2_demo
+    library(ggplot2)
+
+    ggplot(mpg, aes(displ, hwy)) + 
+      geom_point(aes(color = class), size = 3, alpha = 0.5) + scale_color_brewer(palette = "Dark2") + 
+      theme_bw() + theme(panel.grid.minor = element_blank()) + facet_wrap(. ~ year)
+
+    ## @knitr needs_external_input
+    print(newvar)
+    plot(newvar)
+
+Now let’s use the **knitr** chunks we’ve ingested from these two
+external scripts.
 
 # Script 1
 
@@ -57,12 +105,12 @@ head(dat)
 ```
 
               x          y
-    1 0.0000000 -1.1560555
-    2 0.1010101  1.1122334
-    3 0.2020202 -0.4908908
-    4 0.3030303  1.6519833
-    5 0.4040404  0.9578435
-    6 0.5050505  1.7713032
+    1 0.0000000  0.8355745
+    2 0.1010101  0.6192280
+    3 0.2020202 -1.5182268
+    4 0.3030303  1.5524731
+    5 0.4040404  0.8929167
+    6 0.5050505  1.8955532
 
 ## Run the `plot_xy` chunk and create the plot
 
@@ -130,8 +178,8 @@ newvar <- runif(10,0,1)
 print(newvar)
 ```
 
-     [1] 0.54552457 0.95634425 0.67078237 0.11290274 0.68677391 0.63258165
-     [7] 0.07273181 0.17198955 0.56442599 0.52797896
+     [1] 0.8712505 0.5637898 0.2205387 0.4461370 0.8943142 0.6300697 0.9040386
+     [8] 0.3418861 0.6197876 0.8696980
 
 ``` r
 plot(newvar)
