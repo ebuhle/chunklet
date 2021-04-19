@@ -48,11 +48,12 @@ we can read chunks from as many “child” scripts as we want, so long as
 the chunk names don’t conflict!) Typically we would use `echo = FALSE`
 to read in the script’s chunks silently. Note that the code is not
 executed at this point; it is just made available to be invoked in
-subsequent chunks. (BTW, the [insane RMarkdown
-syntax](https://yihui.org/en/2017/11/knitr-verbatim-code-chunk/) needed
-to produce the following verbatim RMarkdown code chunk is far more
-esoteric than code externalization. On the upside, it apparently makes
-the aforementioned chunk tool buttons vanish throughout the document.)
+subsequent chunks. (BTW, the [RMarkdown
+hieroglyphics](https://yihui.org/en/2017/11/knitr-verbatim-code-chunk/)
+needed to produce the following verbatim RMarkdown code chunk is far
+more esoteric than code externalization. On the upside, it apparently
+makes the aforementioned chunk tool buttons vanish throughout the
+document.)
 
     ```{r read_chunk, echo=FALSE}
     read_chunk(here("chunk_test1.R"))
@@ -131,12 +132,12 @@ head(dat)
 ```
 
               x          y
-    1 0.0000000  1.2065218
-    2 0.1010101  0.3305251
-    3 0.2020202 -0.3380344
-    4 0.3030303  0.9562074
-    5 0.4040404 -0.4779032
-    6 0.5050505  0.4040949
+    1 0.0000000 -1.0790846
+    2 0.1010101  0.4564787
+    3 0.2020202 -0.9891231
+    4 0.3030303  0.6761977
+    5 0.4040404  1.1596280
+    6 0.5050505  0.1821313
 
 ## Make a plot
 
@@ -234,8 +235,8 @@ newvar <- runif(10,0,1)
 print(newvar)
 ```
 
-     [1] 0.008015195 0.542895776 0.059609188 0.243687603 0.796427866 0.026146993
-     [7] 0.969244404 0.139243144 0.901149487 0.136289297
+     [1] 0.82357540 0.36167837 0.07116364 0.16100855 0.85992064 0.01587994
+     [7] 0.62643675 0.23864603 0.14201843 0.03801278
 
 ``` r
 plot(newvar)

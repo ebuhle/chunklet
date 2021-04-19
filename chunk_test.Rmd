@@ -29,7 +29,7 @@ The "externalization" strategy shown here offers the best of both worlds:
 
 # Read chunks
 
-First, right after the `setup` chunk, we call `knitr::read_chunk()` to ingest the code chunks from one or more scripts. (This part is crucial: we can read chunks from as many "child" scripts as we want, so long as the chunk names don't conflict!) Typically we would use `echo = FALSE` to read in the script's chunks silently. Note that the code is not executed at this point; it is just made available to be invoked in subsequent chunks. (BTW, the [insane RMarkdown syntax](https://yihui.org/en/2017/11/knitr-verbatim-code-chunk/) needed to produce the following verbatim RMarkdown code chunk is far more esoteric than code externalization. On the upside, it apparently makes the aforementioned chunk tool buttons vanish throughout the document.)
+First, right after the `setup` chunk, we call `knitr::read_chunk()` to ingest the code chunks from one or more scripts. (This part is crucial: we can read chunks from as many "child" scripts as we want, so long as the chunk names don't conflict!) Typically we would use `echo = FALSE` to read in the script's chunks silently. Note that the code is not executed at this point; it is just made available to be invoked in subsequent chunks. (BTW, the [RMarkdown hieroglyphics](https://yihui.org/en/2017/11/knitr-verbatim-code-chunk/) needed to produce the following verbatim RMarkdown code chunk is far more esoteric than code externalization. On the upside, it apparently makes the aforementioned chunk tool buttons vanish throughout the document.)
 
 ````
 `r ''````{r read_chunk, echo=FALSE}
