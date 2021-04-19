@@ -148,11 +148,24 @@ That produces the echoed R code followed by the results of the `print()` and `pl
 <<needs_external_input>>
 ```
 
-And what if we modify `newvar` and then call the summary chunk again? The output is:
+And what if we modify `newvar` and then call the summary chunk again, using different chunk labels to avoid a conflict? The output is:
+
+````
+`r ''````{r assign_newvar2}
+newvar <- runif(10,0,1)
+```
+````
 
 ```{r assign_newvar2}
 newvar <- runif(10,0,1)
 ```
+
+````
+`r ''````{r needs_external_input2, fig.height=5, fig.width=5, out.width = "40%"}
+<<needs_external_input>>
+```
+````
+
 ```{r needs_external_input2, fig.height=5, fig.width=5, out.width = "40%"}
 <<needs_external_input>>
 ```

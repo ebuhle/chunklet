@@ -131,13 +131,13 @@ dat <- data.frame(x = x, y = y)
 head(dat)
 ```
 
-              x          y
-    1 0.0000000 -1.0790846
-    2 0.1010101  0.4564787
-    3 0.2020202 -0.9891231
-    4 0.3030303  0.6761977
-    5 0.4040404  1.1596280
-    6 0.5050505  0.1821313
+              x           y
+    1 0.0000000 -1.28901834
+    2 0.1010101 -0.01521634
+    3 0.2020202  0.53043899
+    4 0.3030303 -0.13472366
+    5 0.4040404 -0.11135649
+    6 0.5050505  0.65664317
 
 ## Make a plot
 
@@ -224,19 +224,27 @@ plot(newvar)
 
 <img src="chunk_test_files/figure-gfm/needs_external_input1-1.png" width="40%" style="display: block; margin: auto;" />
 
-And what if we modify `newvar` and then call the summary chunk again?
-The output is:
+And what if we modify `newvar` and then call the summary chunk again,
+using different chunk labels to avoid a conflict? The output is:
+
+    ```{r assign_newvar2}
+    newvar <- runif(10,0,1)
+    ```
 
 ``` r
 newvar <- runif(10,0,1)
 ```
 
+    ```{r needs_external_input2, fig.height=5, fig.width=5, out.width = "40%"}
+    <<needs_external_input>>
+    ```
+
 ``` r
 print(newvar)
 ```
 
-     [1] 0.82357540 0.36167837 0.07116364 0.16100855 0.85992064 0.01587994
-     [7] 0.62643675 0.23864603 0.14201843 0.03801278
+     [1] 0.81400348 0.16837935 0.24003129 0.03536744 0.17771894 0.01232703
+     [7] 0.02751720 0.75393340 0.18709198 0.27246424
 
 ``` r
 plot(newvar)
