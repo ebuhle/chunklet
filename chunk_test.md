@@ -5,16 +5,16 @@ Eric Buhle
 2019-04-30 (updated 2021-04-18)
 
 -   [Read chunks](#read-chunks)
--   [Script 1](#script-1)
+-   [Child script 1](#child-script-1)
     -   [Create a data frame](#create-a-data-frame)
     -   [Make a plot](#make-a-plot)
     -   [Fit a linear model](#fit-a-linear-model)
--   [Script 2](#script-2)
+-   [Child script 2](#child-script-2)
     -   [Silly `ggplot2` demo](#silly-ggplot2-demo)
     -   [Chunk with inputs from
         RMarkdown](#chunk-with-inputs-from-rmarkdown)
 
-This example follows a helpful [blog
+This demo follows a helpful [blog
 post](http://zevross.com/blog/2014/07/09/making-use-of-external-r-code-in-knitr-and-r-markdown/)
 by Zev Ross that shows how to import code chunks from an external script
 into an RMarkdown document. Also see
@@ -112,7 +112,7 @@ if the results update when we reassign `newvar` and invoke the external
 chunk again, and whether the behavior differs for the `print()` and
 `plot()` statements.
 
-# Script 1
+# Child script 1
 
 ## Create a data frame
 
@@ -130,13 +130,13 @@ dat <- data.frame(x = x, y = y)
 head(dat)
 ```
 
-              x         y
-    1 0.0000000 1.0923361
-    2 0.1010101 0.1921724
-    3 0.2020202 0.1377121
-    4 0.3030303 1.9035662
-    5 0.4040404 1.0046779
-    6 0.5050505 0.8293738
+              x          y
+    1 0.0000000  0.7550921
+    2 0.1010101  0.1807895
+    3 0.2020202  0.6265703
+    4 0.3030303 -0.8688748
+    5 0.4040404  0.5812241
+    6 0.5050505 -0.2407460
 
 ## Make a plot
 
@@ -162,7 +162,7 @@ lmxy <- lm(y ~ x, data = dat)
 summary(lmxy)
 ```
 
-# Script 2
+# Child script 2
 
 Now we’ll use a chunk from the second script, entirely unrelated to the
 first.
@@ -231,8 +231,8 @@ newvar <- runif(10,0,1)
 print(newvar)
 ```
 
-     [1] 0.666258515 0.036717009 0.045206799 0.345214070 0.801928192 0.231067532
-     [7] 0.005078128 0.156382663 0.828422476 0.603508833
+     [1] 0.130062674 0.617317806 0.005395732 0.427716115 0.044895085 0.873186410
+     [7] 0.069388734 0.504263555 0.772519680 0.951557748
 
 ``` r
 plot(newvar)

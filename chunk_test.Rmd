@@ -3,11 +3,11 @@ title: "Test-Driving `knitr::read_chunk()` to Include External Script Chunks in 
 author: "Eric Buhle"
 date: "2019-04-30 (updated `r format(Sys.time(), '%Y-%m-%d')`)"
 output: 
+  github_document: 
+    toc: TRUE
   html_document: 
     toc: TRUE
     toc_float: TRUE
-  github_document: 
-    toc: TRUE
 ---
 
 ```{r setup, include=FALSE}
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(tidy = FALSE, highlight = TRUE, comment = NA,
                       fig.align = "center")
 ```
 
-This example follows a helpful [blog post](http://zevross.com/blog/2014/07/09/making-use-of-external-r-code-in-knitr-and-r-markdown/) by Zev Ross that shows how to import code chunks from an external script into an RMarkdown document. Also see [here](https://rpubs.com/thaufas/450838) for some more creative usage.
+This demo follows a helpful [blog post](http://zevross.com/blog/2014/07/09/making-use-of-external-r-code-in-knitr-and-r-markdown/) by Zev Ross that shows how to import code chunks from an external script into an RMarkdown document. Also see [here](https://rpubs.com/thaufas/450838) for some more creative usage.
 
 RMarkdown is great, but IMO it is unsuitable as an environment for code development, especially for complex analyses. The formatting and interwoven text are distracting and make re-running code a hassle; the chunk tool buttons take up screen real estate and the auto-line wrapping is the enemy of legibility; debugging is a real PITA; and I *hate* the inline presentation of figures and output when running interactively. R scripts are superior in all these respects. Until now, my strategy has been to copy-paste code chunks from a script into an RMarkdown document, a hacky approach with obvious drawbacks. Usually I end up tweaking and refining the code in the .Rmd (as opposed to doing it in the script and having to remember to copy-paste it again) and so the two documents get out of sync.
 
@@ -59,7 +59,7 @@ writeLines(readLines(here("chunk_test2.R")))
 
 The chunk `needs_external_input`, counterintuitively, needs external input. Specifically, `newvar` has not been assigned, so those lines as written would throw an error. We are going to assign `newvar` in an RMarkdown chunk and "pass" it to `needs_external_input`. We'll also see if the results update when we reassign `newvar` and invoke the external chunk again, and whether the behavior differs for the `print()` and `plot()` statements.
 
-# Script 1
+# Child script 1
 
 ## Create a data frame
 
@@ -101,7 +101,7 @@ Result:
 ```{r lm_xy, eval = FALSE}
 ```
 
-# Script 2
+# Child script 2
 
 Now we'll use a chunk from the second script, entirely unrelated to the first.
 
