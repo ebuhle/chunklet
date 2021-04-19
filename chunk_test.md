@@ -35,7 +35,7 @@ worlds:
 First, right after the `setup` chunk, we call `knitr::read_chunk()` to
 ingest the code chunks from one or more scripts. (This part is crucial:
 we can read chunks from as many “child” scripts as we want, so long as
-the chunk names don’t conflict!) Ordinarily we would use `echo = FALSE`
+the chunk names don’t conflict!) Typically we would use `echo = FALSE`
 to read in the script’s chunks silently. Note that the code is not
 executed at this point; it is just made available to be invoked in
 subsequent chunks. (BTW, the [insane RMarkdown
@@ -44,7 +44,7 @@ to produce the following verbatim RMarkdown code chunk is far more
 esoteric than code externalization. On the upside, it apparently makes
 the aforementioned chunk tool buttons vanish throughout the document.)
 
-    ```{r read_chunk}
+    ```{r read_chunk, echo=FALSE}
     read_chunk(here("chunk_test1.R"))
     read_chunk(here("chunk_test2.R"))
     ```
@@ -120,13 +120,13 @@ dat <- data.frame(x = x, y = y)
 head(dat)
 ```
 
-              x            y
-    1 0.0000000  0.398944300
-    2 0.1010101 -0.567377072
-    3 0.2020202  0.061912905
-    4 0.3030303  0.718124146
-    5 0.4040404  0.806425710
-    6 0.5050505  0.003118695
+              x           y
+    1 0.0000000 -0.39566120
+    2 0.1010101  0.11742139
+    3 0.2020202  0.45919810
+    4 0.3030303 -0.02611631
+    5 0.4040404  0.15492290
+    6 0.5050505 -0.22958509
 
 ## Run the `plot_xy` chunk and create the plot
 
@@ -221,8 +221,8 @@ newvar <- runif(10,0,1)
 print(newvar)
 ```
 
-     [1] 0.1866755 0.6625136 0.6842112 0.8966011 0.1786132 0.2268726 0.7951142
-     [8] 0.2318173 0.4718466 0.8869957
+     [1] 0.3823764 0.9108847 0.6328376 0.5720809 0.3803125 0.2438452 0.8560350
+     [8] 0.6641573 0.2413165 0.9071208
 
 ``` r
 plot(newvar)
