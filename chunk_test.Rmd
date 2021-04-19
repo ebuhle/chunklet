@@ -26,9 +26,16 @@ The "externalization" strategy shown here offers the best of both worlds:
 
 # Read chunks
 
-First, right after the `setup` chunk, we call `knitr::read_chunk()` to ingest the code chunks from one or more scripts. (This part is crucial: we can read chunks from as many "child" scripts as we want, so long as the chunk names don't conflict!) Ordinarily we would use `echo = FALSE` to read in the script's chunks silently. Note that the code is not executed at this point; it is just made available to be invoked in subsequent chunks.
+First, right after the `setup` chunk, we call `knitr::read_chunk()` to ingest the code chunks from one or more scripts. (This part is crucial: we can read chunks from as many "child" scripts as we want, so long as the chunk names don't conflict!) Ordinarily we would use `echo = FALSE` to read in the script's chunks silently. Note that the code is not executed at this point; it is just made available to be invoked in subsequent chunks. (BTW, the [insane RMarkdown syntax](https://yihui.org/en/2017/11/knitr-verbatim-code-chunk/) needed to produce the following verbatim RMarkdown code chunk is far more esoteric than code externalization. On the upside, it apparently makes the aforementioned chunk tool buttons vanish throughout the document.)
 
-```{r read_chunks}
+````
+`r ''````{r read_chunk}
+read_chunk(here("chunk_test1.R"))
+read_chunk(here("chunk_test2.R"))
+```
+````
+
+```{r read_chunk, echo=FALSE}
 read_chunk(here("chunk_test1.R"))
 read_chunk(here("chunk_test2.R"))
 ```
@@ -52,6 +59,16 @@ The chunk `needs_external_input`, counterintuitively, needs external input. Spec
 # Script 1
 
 ## Run the `variables_xy` chunk and use the variables it creates
+
+The RMarkdown chunk
+
+````
+`r ''````{r variables_xy}
+```
+````
+
+produces this:
+
 ```{r variables_xy}
 ```
 
@@ -59,12 +76,24 @@ The chunk `needs_external_input`, counterintuitively, needs external input. Spec
 
 This time we'll use `echo = FALSE` to suppress the code.
 
+````
+`r ''````{r plot_xy, fig.height=5, fig.width=5, out.width = "40%", echo = FALSE}
+```
+````
+
 ```{r plot_xy, fig.height=5, fig.width=5, out.width = "40%", echo = FALSE}
 ```
 
 ## Fit linear model
 
-The next chunk shows how to fit a linear model to `y` as a function of `x`, but doesn't actually do so (`eval = FALSE`).
+The next chunk shows how to fit a linear model to `y` as a function of `x`, but doesn't actually do so (`eval = FALSE`). RMarkdown:
+
+````
+`r ''````{r lm_xy, eval = FALSE}
+```
+````
+
+Result:
 
 ```{r lm_xy, eval = FALSE}
 ```
@@ -75,12 +104,35 @@ Now we'll use a chunk from the second script, entirely unrelated to the first.
 
 ## Silly `ggplot2` demo
 
+The RMarkdown syntax
+
+````
+`r ''````{r ggplot2_demo, fig.width=7, fig.height=3, out.width="75%"}
+```
+````
+
+does this, for whatever reason:
+
 ```{r ggplot2_demo, fig.width=7, fig.height=3, out.width="75%"}
 ```
 
 ## Chunk that requires objects defined in RMarkdown
 
 Can we invoke an external chunk that relies on objects defined here in the RMarkdown itself? Let's find out. First we assign a variable `newvar`, and then we call a chunk that prints its contents and plots it with the default method.
+
+````
+`r ''````{r assign_newvar1}
+newvar <- 1:10
+```
+````
+
+````
+`r ''````{r needs_external_input1, fig.height=5, fig.width=5, out.width = "40%"}
+<<needs_external_input>>
+```
+````
+
+That produces the echoed R code followed by the results of the `print()` and `plot()` calls, respectively:
 
 ```{r assign_newvar1}
 newvar <- 1:10
@@ -89,7 +141,7 @@ newvar <- 1:10
 <<needs_external_input>>
 ```
 
-And what if we modify `newvar` and then call the summary chunk again?
+And what if we modify `newvar` and then call the summary chunk again? The output is:
 
 ```{r assign_newvar2}
 newvar <- runif(10,0,1)

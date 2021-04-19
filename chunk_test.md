@@ -38,12 +38,16 @@ we can read chunks from as many “child” scripts as we want, so long as
 the chunk names don’t conflict!) Ordinarily we would use `echo = FALSE`
 to read in the script’s chunks silently. Note that the code is not
 executed at this point; it is just made available to be invoked in
-subsequent chunks.
+subsequent chunks. (BTW, the [insane RMarkdown
+syntax](https://yihui.org/en/2017/11/knitr-verbatim-code-chunk/) needed
+to produce the following verbatim RMarkdown code chunk is far more
+esoteric than code externalization. On the upside, it apparently makes
+the aforementioned chunk tool buttons vanish throughout the document.)
 
-``` r
-read_chunk(here("chunk_test1.R"))
-read_chunk(here("chunk_test2.R"))
-```
+    ```{r read_chunk}
+    read_chunk(here("chunk_test1.R"))
+    read_chunk(here("chunk_test2.R"))
+    ```
 
 Let’s see what’s in these external scripts. This is `chunk_test1.R`:
 
@@ -102,6 +106,13 @@ chunk again, and whether the behavior differs for the `print()` and
 
 ## Run the `variables_xy` chunk and use the variables it creates
 
+The RMarkdown chunk
+
+    ```{r variables_xy}
+    ```
+
+produces this:
+
 ``` r
 x <- seq(0, 10, length = 100)
 y <- x + rnorm(100)
@@ -109,24 +120,32 @@ dat <- data.frame(x = x, y = y)
 head(dat)
 ```
 
-              x          y
-    1 0.0000000  0.1479187
-    2 0.1010101 -0.7328454
-    3 0.2020202 -0.5355338
-    4 0.3030303 -0.9461888
-    5 0.4040404  1.4595739
-    6 0.5050505 -1.1773967
+              x            y
+    1 0.0000000  0.398944300
+    2 0.1010101 -0.567377072
+    3 0.2020202  0.061912905
+    4 0.3030303  0.718124146
+    5 0.4040404  0.806425710
+    6 0.5050505  0.003118695
 
 ## Run the `plot_xy` chunk and create the plot
 
 This time we’ll use `echo = FALSE` to suppress the code.
+
+    ```{r plot_xy, fig.height=5, fig.width=5, out.width = "40%", echo = FALSE}
+    ```
 
 <img src="chunk_test_files/figure-gfm/plot_xy-1.png" width="40%" style="display: block; margin: auto;" />
 
 ## Fit linear model
 
 The next chunk shows how to fit a linear model to `y` as a function of
-`x`, but doesn’t actually do so (`eval = FALSE`).
+`x`, but doesn’t actually do so (`eval = FALSE`). RMarkdown:
+
+    ```{r lm_xy, eval = FALSE}
+    ```
+
+Result:
 
 ``` r
 lmxy <- lm(y ~ x, data = dat)
@@ -139,6 +158,13 @@ Now we’ll use a chunk from the second script, entirely unrelated to the
 first.
 
 ## Silly `ggplot2` demo
+
+The RMarkdown syntax
+
+    ```{r ggplot2_demo, fig.width=7, fig.height=3, out.width="75%"}
+    ```
+
+does this, for whatever reason:
 
 ``` r
 library(ggplot2)
@@ -157,6 +183,17 @@ the RMarkdown itself? Let’s find out. First we assign a variable
 `newvar`, and then we call a chunk that prints its contents and plots it
 with the default method.
 
+    ```{r assign_newvar1}
+    newvar <- 1:10
+    ```
+
+    ```{r needs_external_input1, fig.height=5, fig.width=5, out.width = "40%"}
+    <<needs_external_input>>
+    ```
+
+That produces the echoed R code followed by the results of the `print()`
+and `plot()` calls, respectively:
+
 ``` r
 newvar <- 1:10
 ```
@@ -174,6 +211,7 @@ plot(newvar)
 <img src="chunk_test_files/figure-gfm/needs_external_input1-1.png" width="40%" style="display: block; margin: auto;" />
 
 And what if we modify `newvar` and then call the summary chunk again?
+The output is:
 
 ``` r
 newvar <- runif(10,0,1)
@@ -183,8 +221,8 @@ newvar <- runif(10,0,1)
 print(newvar)
 ```
 
-     [1] 0.76998502 0.64402819 0.66886307 0.50661462 0.07519542 0.70125307
-     [7] 0.91853503 0.81782314 0.53554261 0.53655458
+     [1] 0.1866755 0.6625136 0.6842112 0.8966011 0.1786132 0.2268726 0.7951142
+     [8] 0.2318173 0.4718466 0.8869957
 
 ``` r
 plot(newvar)
