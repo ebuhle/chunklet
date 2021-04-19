@@ -90,6 +90,14 @@ Here is `chunk_test2.R`:
     print(newvar)
     plot(newvar)
 
+The chunk `needs_external_input`, counterintuitively, needs external
+input. Specifically, `newvar` has not been assigned, so those lines as
+written would throw an error. We are going to assign `newvar` in an
+RMarkdown chunk and “pass” it to `needs_external_input`. We’ll also see
+if the results update when we reassign `newvar` and invoke the external
+chunk again, and whether the behavior differs for the `print()` and
+`plot()` statements.
+
 Now let’s use the **knitr** chunks we’ve ingested from these two
 external scripts.
 
@@ -104,13 +112,13 @@ dat <- data.frame(x = x, y = y)
 head(dat)
 ```
 
-              x          y
-    1 0.0000000  0.8355745
-    2 0.1010101  0.6192280
-    3 0.2020202 -1.5182268
-    4 0.3030303  1.5524731
-    5 0.4040404  0.8929167
-    6 0.5050505  1.8955532
+              x           y
+    1 0.0000000 -1.75123447
+    2 0.1010101 -0.06833459
+    3 0.2020202 -0.15204394
+    4 0.3030303 -0.86556698
+    5 0.4040404 -0.14170262
+    6 0.5050505 -0.22392059
 
 ## Run the `plot_xy` chunk and create the plot
 
@@ -178,8 +186,8 @@ newvar <- runif(10,0,1)
 print(newvar)
 ```
 
-     [1] 0.8712505 0.5637898 0.2205387 0.4461370 0.8943142 0.6300697 0.9040386
-     [8] 0.3418861 0.6197876 0.8696980
+     [1] 0.93234423 0.27269406 0.19986203 0.12383131 0.72788539 0.05632216
+     [7] 0.43570585 0.12014576 0.90407051 0.53589644
 
 ``` r
 plot(newvar)

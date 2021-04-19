@@ -3,8 +3,8 @@ title: "Test-Driving `knitr::read_chunk()` to Include External Script Chunks in 
 author: "Eric Buhle"
 date: "2019-04-30 (updated `r format(Sys.time(), '%Y-%m-%d')`)"
 output: 
-  github_document: default
   html_document: default
+  github_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -46,6 +46,8 @@ Here is `chunk_test2.R`:
 ```{r chunk_test2, echo=FALSE, warning=FALSE}
 writeLines(readLines(here("chunk_test2.R")))
 ```
+
+The chunk `needs_external_input`, counterintuitively, needs external input. Specifically, `newvar` has not been assigned, so those lines as written would throw an error. We are going to assign `newvar` in an RMarkdown chunk and "pass" it to `needs_external_input`. We'll also see if the results update when we reassign `newvar` and invoke the external chunk again, and whether the behavior differs for the `print()` and `plot()` statements.
 
 Now let's use the **knitr** chunks we've ingested from these two external scripts.
 
